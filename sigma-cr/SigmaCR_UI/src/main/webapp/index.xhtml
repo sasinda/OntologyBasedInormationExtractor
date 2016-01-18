@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="SigmaCR home page"/>
+    <meta name="author" content="sigma-cr.com"/>
+    <h:outputStylesheet library="css"
+                        name="bootstrap.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css"
+                        name="comingsoon.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css"
+                        name="bootstrap-responsive.min.css"></h:outputStylesheet>
+    <h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+    <title>SigmaCR home</title>
+</h:head>
+
+<h:body style="background:url(resources/img/pattern.png) repeat center 0 #fff">
+    <div class="wrapper">
+        <div class="container-fluid">
+
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span11">
+                    <h2 style="color: #f5f5f5; margin-left:20px ">SigmaCR</h2>
+                    <p style="color: #f5f5f5;
+margin-left:20px">Customer Review Aggregator</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="comingsoonBlk">
+            <p>Type the product's name here</p>
+
+            <div class="searchbox">
+
+            </div>
+            <h:form id="searchForm">
+                <span class="text"><h:inputText id="seachTxt"
+                                                value="#{searchBean.query}"></h:inputText></span>
+                <span class="subscribe"><h:commandButton
+                        value="Search" action="#{searchBean.search}"
+
+                        styleClass="btn btn-primary btn-warning pull-right"></h:commandButton>
+                </span>
+            </h:form>
+            <br class="clr"/>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12" style="height: 100px;"></div>
+        </div>
+        <div class="row-fluid">
+            <div class="span1"></div>
+            <div class="span10">
+                <br/>
+                <h2>Trending Products</h2>
+                <!--### The following section shows the result list in
+rows of 3 items ###-->
+                <c:forEach var="i" begin="0"
+                           end="#{searchBean.trends.size()}" step="3">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <ul class="thumbnails">
+                                <c:set var="id" value="${i}"/>
+                                <c:forEach var="j" begin="${i}"
+                                           end="${i+2}" step="1">
+                                    <c:if test="#{id lt
+searchBean.trends.size()}">
+                                        <li class="span4">
+                                            <div class="thumbnail"
+                                                 style="margin-top: 30px">
+                                                <div class="caption">
+
+                                                    <h3>#{searchBean.trends[id].productName}</h3>
+                                                    <img
+                                                            src="#{searchBean.trends[id].productImageURL}"
+
+                                                            alt="#{searchBean.trends[id].productName}"/>
+
+                                                    <p>
+
+                                                        #{searchBean.trends[id].overallRating}
+                                                    </p>
+                                                    <p>
+                                                        <h:form>
+                                                            <h:commandButton
+
+                                                                    action="#{viewProductBean.getProductDetails(searchBean.trends[id].productId)}"
+
+                                                                    styleClass="btn btn-primary" value="View">
+                                                            </h:commandButton>
+                                                        </h:form>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </c:if>
+                                    <c:set var="id" value="${id+1}"/>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </div>
+                </c:forEach>
+                <!--### end of pagination section ###-->
+            </div>
+        </div>
+    </div>
+</h:body>
+
+</html>

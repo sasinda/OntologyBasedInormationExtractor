@@ -1,0 +1,144 @@
+Imports: { 
+import sigma.cr.onto.OntoManager;
+import sigma.cr.onto.ProductClass; 
+} 
+/*
+//Initialize sigma.cr.onto.OntoManager
+//
+*/
+Phase: initialize
+Input: Sentence
+Options: control = once
+Rule: init
+({Sentence}):tag --> :tag{
+						OntoManager om = OntoManager.getInstance();
+						om.load();
+					}
+
+Phase: SC_Splitup
+Input: Token FeatureSuspectSet Feature 
+Options: control = appelt
+
+
+/*
+// splits suspect sets in to individual suspects
+// <>color and brightness<> --> <s>color</s> and <s>brightness</s>
+*/
+Rule:  SplitSets
+({FeatureSuspectSet}):tag --> :tag{
+									 Annotation featureSet=tagAnnots.iterator().next();
+       // System.out.println("---------------------------------------------------");
+
+
+        try {
+            Long start= featureSet.getStartNode().getOffset();
+            Long end =featureSet.getEndNode().getOffset() ;
+            AnnotationSet toks = inputAS.get("Token", start, end);
+            List<Annotation> tokens = new ArrayList<Annotation>(toks);
+            Collections.sort(tokens, new OffsetComparator());
+
+            DocumentContent con = doc.getContent().getContent(start ,end);
+            String content=con.toString();
+           // System.out.println(content);
+
+            //System.out.println("start"+start+ "  end:"+end);
+            String suspect;
+            boolean split;
+            Long s,e;
+            List<Annotation> susTokens= new ArrayList<Annotation>(3);
+            Annotation token;
+            for (int i = 0; i <tokens.size() ; i++) {
+                token=tokens.get(i);
+                String cat= (String) token.getFeatures().get("category");
+                split = cat.equals("CC") || cat.equals(",");
+                if(!split){
+                    susTokens.add(token);
+                }else{
+                    if( susTokens.size()>0){
+                        s=susTokens.get(0).getStartNode().getOffset();
+                        e=susTokens.get(susTokens.size()-1).getEndNode().getOffset();
+                   //     System.out.println("s"+s+ "  e:"+e);
+                        outputAS.add(s,e,"FSuspect",Factory.newFeatureMap());
+                        susTokens.clear();
+                    }
+                }
+            }
+
+            if( susTokens.size()>0){
+                s=susTokens.get(0).getStartNode().getOffset();
+                e=susTokens.get(susTokens.size()-1).getEndNode().getOffset();
+               // System.out.println("s"+s+ "  e:"+e);
+                outputAS.add(s,e,"FSuspect",Factory.newFeatureMap());
+            }
+
+           // System.out.println("---------------------------------------------------");
+
+        } catch (InvalidOffsetException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+}
+					
+
+					
+Phase: SC_Confirmation_h0
+Input: FSuspect Feature 
+Options: control = appelt	
+				
+Rule: removeSuspects1
+Priority:400
+({FSuspect within Feature}):tag --> :tag{
+	outputAS.removeAll(tagAnnots);	
+} 
+
+Rule: suspectConfirm
+Priority:300
+({FSuspect notContains Feature }):tag --> :tag{
+	Annotation suspect = tagAnnots.iterator().next();
+        Long start = suspect.getStartNode().getOffset();
+        Long end = suspect.getEndNode().getOffset();
+        AnnotationSet toks = inputAS.get("Token", start, end);
+        AnnotationSet lokps = inputAS.get("Lookup", start, end);
+        List<Annotation> tokens = new ArrayList<Annotation>(toks);
+        List<Annotation> lookups = new ArrayList<Annotation>(lokps);
+        Collections.sort(tokens, new OffsetComparator());
+        Collections.sort(lookups, new OffsetComparator());
+
+        String category = (String) doc.getFeatures().get("category");
+		//System.out.println(category);
+        OntoManager om = OntoManager.getInstance();
+        ProductClass product = om.getProductClass(category);
+
+        //If token is an adjective and not a lookup ignore it.
+        // check lookup feature belongs to product
+        boolean has = false;
+        String URI=null;
+        for (Annotation lookup : lookups) {
+            URI = (String) lookup.getFeatures().get("URI");
+            has = product.hasFeature(URI);
+        }
+        // if no lookup found in suspect, get any lookup within the sentence and find feature similarity.
+        // if (!has) {
+            // AnnotationSet sentence = inputAS.getCovering("Sentence", start, end);
+
+            // Long senStart = sentence.firstNode().getOffset();
+            // Long sEnd = sentence.lastNode().getOffset();
+            // AnnotationSet lookupsBfr = inputAS.get("Lookup", senStart, start);
+            // for (Annotation lookupBfr : lookupsBfr) {
+                // URI = (String) lookupBfr.getFeatures().get("URI");
+                // has = product.hasFeature(URI);
+            // }
+        // }
+        if (has) {
+            FeatureMap fmap = Factory.newFeatureMap();
+            fmap.put("class", URI);
+            try {
+                outputAS.add(start, end, "Feature", fmap);
+            } catch (InvalidOffsetException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+		System.out.println(has);
+} 
+
+

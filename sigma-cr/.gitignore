@@ -1,0 +1,12 @@
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Eclipse project files
+.classpath.project
+
+# idea files
+*.iml
+*.ipr
+.idea
+target/
+bin/

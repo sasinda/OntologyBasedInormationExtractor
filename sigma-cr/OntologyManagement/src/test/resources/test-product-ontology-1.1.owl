@@ -1,0 +1,1389 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY product_ontolology "http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#" >
+    <!ENTITY annotation "http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology/annotation#" >
+]>
+
+
+<rdf:RDF xmlns="http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#"
+     xml:base="http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology"
+     xmlns:annotation="http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology/annotation#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:product_ontolology="http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology">
+        <rdfs:comment>Product Ontology to be used by the SigmaCR</rdfs:comment>
+        <owl:versionIRI rdf:resource="http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology/0.1"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#derivationallyRelatedFrom -->
+
+    <owl:AnnotationProperty rdf:about="&product_ontolology;derivationallyRelatedFrom"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#derivationallyRelatedFromSyn -->
+
+    <owl:AnnotationProperty rdf:about="&product_ontolology;derivationallyRelatedFromSyn"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#isNegative -->
+
+    <owl:AnnotationProperty rdf:about="&product_ontolology;isNegative">
+        <rdfs:comment>defines what the default behviour of the featues scale.
+Ex: for feature class Weight. 
+isNegative true means light weight is good.</rdfs:comment>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#p1DRel -->
+
+    <owl:AnnotationProperty rdf:about="&product_ontolology;p1DRel"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#p1Syn -->
+
+    <owl:AnnotationProperty rdf:about="&product_ontolology;p1Syn">
+        <rdfs:label>part 1 synset</rdfs:label>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#p2DRel -->
+
+    <owl:AnnotationProperty rdf:about="&product_ontolology;p2DRel"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#p2Syn -->
+
+    <owl:AnnotationProperty rdf:about="&product_ontolology;p2Syn"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#p3DRel -->
+
+    <owl:AnnotationProperty rdf:about="&product_ontolology;p3DRel"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#p3Syn -->
+
+    <owl:AnnotationProperty rdf:about="&product_ontolology;p3Syn"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#synExcludes -->
+
+    <owl:AnnotationProperty rdf:about="&product_ontolology;synExcludes"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#synInclude -->
+
+    <owl:AnnotationProperty rdf:about="&product_ontolology;synInclude"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology/annotation#synAugmented -->
+
+    <owl:AnnotationProperty rdf:about="&annotation;synAugmented"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology/annotation#synset -->
+
+    <owl:AnnotationProperty rdf:about="&annotation;synset"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology/annotation#techWords -->
+
+    <owl:AnnotationProperty rdf:about="&annotation;techWords"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#hasComplement -->
+
+    <owl:ObjectProperty rdf:about="&product_ontolology;hasComplement">
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdfs:domain rdf:resource="&product_ontolology;Feature"/>
+        <rdfs:range rdf:resource="&product_ontolology;Feature"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#hasComponent -->
+
+    <owl:ObjectProperty rdf:about="&product_ontolology;hasComponent">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:range rdf:resource="&product_ontolology;Component"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#hasFeature -->
+
+    <owl:ObjectProperty rdf:about="&product_ontolology;hasFeature">
+        <rdf:type rdf:resource="&owl;AsymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:range rdf:resource="&product_ontolology;Feature"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#hasReviewValue -->
+
+    <owl:ObjectProperty rdf:about="&product_ontolology;hasReviewValue">
+        <rdfs:range rdf:resource="&product_ontolology;ReviewValue"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#value -->
+
+    <owl:DatatypeProperty rdf:about="&product_ontolology;value">
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:onDatatype rdf:resource="&xsd;integer"/>
+                <owl:withRestrictions rdf:parseType="Collection">
+                    <rdf:Description>
+                        <xsd:maxExclusive rdf:datatype="&xsd;integer">10</xsd:maxExclusive>
+                    </rdf:Description>
+                </owl:withRestrictions>
+            </rdfs:Datatype>
+        </rdfs:range>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#3D -->
+
+    <owl:Class rdf:about="&product_ontolology;3D">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Technological_Feature"/>
+        <owl:disjointWith rdf:resource="&product_ontolology;SmartTV"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Acceleration -->
+
+    <owl:Class rdf:about="&product_ontolology;Acceleration">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VehicleFeatures"/>
+        <derivationallyRelatedFrom>speed_up</derivationallyRelatedFrom>
+        <derivationallyRelatedFrom>accelerate</derivationallyRelatedFrom>
+        <derivationallyRelatedFrom>speed</derivationallyRelatedFrom>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#AntiGlare -->
+
+    <owl:Class rdf:about="&product_ontolology;AntiGlare">
+        <rdfs:label xml:lang="en">no glare</rdfs:label>
+        <rdfs:label xml:lang="en">no shadows</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Display_Quality"/>
+        <synInclude xml:lang="en">anti blaze</synInclude>
+        <synExcludes xml:lang="en">anti brillience</synExcludes>
+        <synInclude xml:lang="en">anti glare</synInclude>
+        <annotation:synAugmented xml:lang="en">anti glare, anti blaze, anti brillience</annotation:synAugmented>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Automotive_Vehicle -->
+
+    <owl:Class rdf:about="&product_ontolology;Automotive_Vehicle">
+        <rdfs:label>Automotive Vehicle</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Vehicle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Battery -->
+
+    <owl:Class rdf:about="&product_ontolology;Battery">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;ElectronicComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#BatteryCharge -->
+
+    <owl:Class rdf:about="&product_ontolology;BatteryCharge">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;BatteryFeature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#BatteryFeature -->
+
+    <owl:Class rdf:about="&product_ontolology;BatteryFeature">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Qualitative_Feature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#BatteryLife -->
+
+    <owl:Class rdf:about="&product_ontolology;BatteryLife">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;BatteryFeature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Bicycle -->
+
+    <owl:Class rdf:about="&product_ontolology;Bicycle">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Vehicle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#BlackLevel -->
+
+    <owl:Class rdf:about="&product_ontolology;BlackLevel">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Display_Quality"/>
+        <synInclude>blackness</synInclude>
+        <synInclude>inkiness</synInclude>
+        <synInclude>black</synInclude>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Brightness -->
+
+    <owl:Class rdf:about="&product_ontolology;Brightness">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Display_Quality"/>
+        <synInclude>luminousness</synInclude>
+        <synInclude>luminance</synInclude>
+        <synInclude>brightness_level</synInclude>
+        <derivationallyRelatedFrom>brilliant</derivationallyRelatedFrom>
+        <derivationallyRelatedFrom>vivid</derivationallyRelatedFrom>
+        <synInclude>luminosity</synInclude>
+        <synInclude>light</synInclude>
+        <derivationallyRelatedFrom>bright</derivationallyRelatedFrom>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#BrownGoods -->
+
+    <owl:Class rdf:about="&product_ontolology;BrownGoods">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;HomeAppliences"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#CRT_Display -->
+
+    <owl:Class rdf:about="&product_ontolology;CRT_Display">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VideoDisplay"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Car -->
+
+    <owl:Class rdf:about="&product_ontolology;Car">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Automotive_Vehicle"/>
+        <synInclude>gondola</synInclude>
+        <synInclude>elevator_car</synInclude>
+        <synInclude>railroad_car</synInclude>
+        <synInclude>railway_car</synInclude>
+        <synInclude>railcar</synInclude>
+        <synInclude>auto</synInclude>
+        <synInclude>machine</synInclude>
+        <synInclude>cable_car</synInclude>
+        <synInclude>motorcar</synInclude>
+        <synInclude>automobile</synInclude>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Color -->
+
+    <owl:Class rdf:about="&product_ontolology;Color">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;External_Appearence"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Color_Quality -->
+
+    <owl:Class rdf:about="&product_ontolology;Color_Quality">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Display_Quality"/>
+        <owl:disjointWith rdf:resource="&product_ontolology;DisplayResolution"/>
+        <derivationallyRelatedFrom>colorise</derivationallyRelatedFrom>
+        <synInclude>gloss</synInclude>
+        <synInclude>vividness</synInclude>
+        <synInclude>semblance</synInclude>
+        <synInclude>coloring</synInclude>
+        <derivationallyRelatedFrom>colour_in</derivationallyRelatedFrom>
+        <synInclude>colour</synInclude>
+        <synInclude>colouration</synInclude>
+        <derivationallyRelatedFrom>colourise</derivationallyRelatedFrom>
+        <derivationallyRelatedFrom>colourize</derivationallyRelatedFrom>
+        <synInclude>colour </synInclude>
+        <synInclude>color</synInclude>
+        <synInclude>colouring</synInclude>
+        <derivationallyRelatedFrom>color_in</derivationallyRelatedFrom>
+        <synInclude>coloration</synInclude>
+        <derivationallyRelatedFrom>colorize</derivationallyRelatedFrom>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Comfort -->
+
+    <owl:Class rdf:about="&product_ontolology;Comfort">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VehicleFeatures"/>
+        <derivationallyRelatedFrom>comfy</derivationallyRelatedFrom>
+        <synInclude>quilt</synInclude>
+        <synInclude>comforter</synInclude>
+        <synInclude>puff</synInclude>
+        <derivationallyRelatedFrom>comfortable</derivationallyRelatedFrom>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Component -->
+
+    <owl:Class rdf:about="&product_ontolology;Component">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Product"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#ConsumerElectronicProduct -->
+
+    <owl:Class rdf:about="&product_ontolology;ConsumerElectronicProduct">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Product"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Contrast -->
+
+    <owl:Class rdf:about="&product_ontolology;Contrast">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Display_Quality"/>
+        <derivationallyRelatedFrom>counterpoint</derivationallyRelatedFrom>
+        <synInclude>direct_contrast</synInclude>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Degree -->
+
+    <owl:Class rdf:about="&product_ontolology;Degree">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;QualityScale"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Design -->
+
+    <owl:Class rdf:about="&product_ontolology;Design">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;External_Appearence"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#DigitalCamera -->
+
+    <owl:Class rdf:about="&product_ontolology;DigitalCamera">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;ConsumerElectronicProduct"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&product_ontolology;hasFeature"/>
+                <owl:someValuesFrom rdf:resource="&product_ontolology;PowerConsumption"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Axiom>
+        <isNegative>false</isNegative>
+        <owl:annotatedSource rdf:resource="&product_ontolology;DigitalCamera"/>
+        <owl:annotatedProperty rdf:resource="&rdfs;subClassOf"/>
+        <owl:annotatedTarget>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&product_ontolology;hasFeature"/>
+                <owl:someValuesFrom rdf:resource="&product_ontolology;PowerConsumption"/>
+            </owl:Restriction>
+        </owl:annotatedTarget>
+    </owl:Axiom>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#DisplayResolution -->
+
+    <owl:Class rdf:about="&product_ontolology;DisplayResolution">
+        <rdfs:label>Resolution</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Display_Quality"/>
+        <p1DRel>show</p1DRel>
+        <synInclude>resolve</synInclude>
+        <p1Syn>video_display</p1Syn>
+        <p1Syn>Video Display</p1Syn>
+        <p2DRel>purpose</p2DRel>
+        <synInclude>firmness_of_purpose</synInclude>
+        <p1DRel>present</p1DRel>
+        <p1Syn>presentation</p1Syn>
+        <p1Syn>Display</p1Syn>
+        <synInclude>firmness</synInclude>
+        <synInclude>resolving_power</synInclude>
+        <p1Syn>display</p1Syn>
+        <synInclude>resoluteness</synInclude>
+        <derivationallyRelatedFrom>purpose</derivationallyRelatedFrom>
+        <p1DRel>demo</p1DRel>
+        <p1DRel>exhibit</p1DRel>
+        <p1DRel>demonstrate</p1DRel>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Display_Quality -->
+
+    <owl:Class rdf:about="&product_ontolology;Display_Quality">
+        <rdfs:label>Display Features</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Qualitative_Feature"/>
+        <synInclude>Video Display Quality</synInclude>
+        <synInclude>Display Quality</synInclude>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Durability -->
+
+    <owl:Class rdf:about="&product_ontolology;Durability">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Qualitative_Feature"/>
+        <synInclude>strength</synInclude>
+        <derivationallyRelatedFrom>enduring</derivationallyRelatedFrom>
+        <synInclude>lastingness</synInclude>
+        <derivationallyRelatedFrom>abiding</derivationallyRelatedFrom>
+        <derivationallyRelatedFrom>imperishable</derivationallyRelatedFrom>
+        <synInclude>enduringness</synInclude>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Ease_of_Configuration -->
+
+    <owl:Class rdf:about="&product_ontolology;Ease_of_Configuration">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Usability_Feature"/>
+        <owl:disjointWith rdf:resource="&product_ontolology;Ease_of_Use"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Ease_of_Use -->
+
+    <owl:Class rdf:about="&product_ontolology;Ease_of_Use">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Usability_Feature"/>
+        <p2DRel>practise</p2DRel>
+        <p1DRel>simple</p1DRel>
+        <p1Syn>informality</p1Syn>
+        <p2DRel>do</p2DRel>
+        <p1DRel>uncomplicated</p1DRel>
+        <p2Syn>use</p2Syn>
+        <p1Syn>easiness</p1Syn>
+        <p2DRel>practice</p2DRel>
+        <p1Syn>simpleness</p1Syn>
+        <p1DRel>easy</p1DRel>
+        <p2Syn>enjoyment</p2Syn>
+        <p2Syn>purpose</p2Syn>
+        <p1DRel>unproblematic</p1DRel>
+        <p1Syn>simplicity</p1Syn>
+        <p2Syn>usance</p2Syn>
+        <p2Syn>function</p2Syn>
+        <p2Syn>role</p2Syn>
+        <p2Syn>use_of_goods_and_services</p2Syn>
+        <p1DRel>elementary</p1DRel>
+        <p1Syn>ease</p1Syn>
+        <p2DRel>exercise</p2DRel>
+        <p2Syn>economic_consumption</p2Syn>
+        <p2Syn>consumption</p2Syn>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#ElectronicComponent -->
+
+    <owl:Class rdf:about="&product_ontolology;ElectronicComponent">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Component"/>
+        <rdfs:subClassOf rdf:resource="&product_ontolology;ConsumerElectronicProduct"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Exterior -->
+
+    <owl:Class rdf:about="&product_ontolology;Exterior">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VehicleFeatures"/>
+        <synInclude>outside</synInclude>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#External_Appearence -->
+
+    <owl:Class rdf:about="&product_ontolology;External_Appearence">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Qualitative_Feature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#External_HDD -->
+
+    <owl:Class rdf:about="&product_ontolology;External_HDD">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;HardDisk"/>
+        <owl:disjointWith rdf:resource="&product_ontolology;Internal_HDD"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Feature -->
+
+    <owl:Class rdf:about="&product_ontolology;Feature"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Fridge -->
+
+    <owl:Class rdf:about="&product_ontolology;Fridge">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;ConsumerElectronicProduct"/>
+        <rdfs:subClassOf rdf:resource="&product_ontolology;WhiteGoods"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#FuelEfficiency -->
+
+    <owl:Class rdf:about="&product_ontolology;FuelEfficiency">
+        <rdfs:label>Mileage</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VehicleFeatures"/>
+        <synInclude>fuel_consumption_rate</synInclude>
+        <annotation:techWords>km/l</annotation:techWords>
+        <synInclude>gas_mileage</synInclude>
+        <synInclude>gasoline_mileage</synInclude>
+        <synInclude>milage</synInclude>
+        <p1DRel>fuel</p1DRel>
+        <p2DRel>efficient</p2DRel>
+        <p2Syn>efficiency</p2Syn>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Grade -->
+
+    <owl:Class rdf:about="&product_ontolology;Grade">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;QualityScale"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#HardDisk -->
+
+    <owl:Class rdf:about="&product_ontolology;HardDisk">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;ElectronicComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Headset -->
+
+    <owl:Class rdf:about="&product_ontolology;Headset">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;ElectronicComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#HomeAppliences -->
+
+    <owl:Class rdf:about="&product_ontolology;HomeAppliences">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Product"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#InputLag -->
+
+    <owl:Class rdf:about="&product_ontolology;InputLag">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VideoQuality"/>
+        <p1Syn>input signal</p1Syn>
+        <p1Syn>input</p1Syn>
+        <p2Syn>stave</p2Syn>
+        <p2Syn>slowdown</p2Syn>
+        <p2Syn>retardation</p2Syn>
+        <p1DRel>commentate</p1DRel>
+        <p2Syn>lag</p2Syn>
+        <p2DRel>retard</p2DRel>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Interior -->
+
+    <owl:Class rdf:about="&product_ontolology;Interior">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VehicleFeatures"/>
+        <derivationallyRelatedFrom>interiorise</derivationallyRelatedFrom>
+        <synInclude>inside</synInclude>
+        <derivationallyRelatedFrom>interiorize</derivationallyRelatedFrom>
+        <derivationallyRelatedFrom>internalize</derivationallyRelatedFrom>
+        <derivationallyRelatedFrom>internalise</derivationallyRelatedFrom>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Internal_HDD -->
+
+    <owl:Class rdf:about="&product_ontolology;Internal_HDD">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;HardDisk"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#LCD_Display -->
+
+    <owl:Class rdf:about="&product_ontolology;LCD_Display">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VideoDisplay"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#LED_Display -->
+
+    <owl:Class rdf:about="&product_ontolology;LED_Display">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VideoDisplay"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#LapTop -->
+
+    <owl:Class rdf:about="&product_ontolology;LapTop">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;ConsumerElectronicProduct"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#LaptopBattery -->
+
+    <owl:Class rdf:about="&product_ontolology;LaptopBattery">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Battery"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#LaptopHDD -->
+
+    <owl:Class rdf:about="&product_ontolology;LaptopHDD">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Internal_HDD"/>
+        <owl:disjointWith rdf:resource="&product_ontolology;PC_HDD"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Level -->
+
+    <owl:Class rdf:about="&product_ontolology;Level">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;QualityScale"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Maneuverability -->
+
+    <owl:Class rdf:about="&product_ontolology;Maneuverability">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VehicleFeatures"/>
+        <derivationallyRelatedFrom>maneuverable</derivationallyRelatedFrom>
+        <synInclude>manoeuvrability</synInclude>
+        <derivationallyRelatedFrom>manoeuvrable</derivationallyRelatedFrom>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#MemoryCard -->
+
+    <owl:Class rdf:about="&product_ontolology;MemoryCard">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;ElectronicComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#MobilePhone -->
+
+    <owl:Class rdf:about="&product_ontolology;MobilePhone">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;ConsumerElectronicProduct"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#MotionControls -->
+
+    <owl:Class rdf:about="&product_ontolology;MotionControls">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Usability_Feature"/>
+        <p1DRel>gesture</p1DRel>
+        <p1Syn>apparent_movement</p1Syn>
+        <p1Syn>apparent_motion</p1Syn>
+        <p1Syn>movement</p1Syn>
+        <p1DRel>motion</p1DRel>
+        <p1DRel>gesticulate</p1DRel>
+        <p1Syn>motion</p1Syn>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#MotionHandling -->
+
+    <owl:Class rdf:about="&product_ontolology;MotionHandling">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VideoQuality"/>
+        <p1Syn>motion</p1Syn>
+        <p2Syn>treatment</p2Syn>
+        <p2Syn>handling</p2Syn>
+        <p1Syn>movement</p1Syn>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#MotionRate -->
+
+    <owl:Class rdf:about="&product_ontolology;MotionRate">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;MotionHandling"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&product_ontolology;hasComplement"/>
+                <owl:allValuesFrom rdf:resource="&product_ontolology;ResponseTime"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#NoiseReduction -->
+
+    <owl:Class rdf:about="&product_ontolology;NoiseReduction">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VideoQuality"/>
+        <p1DRel>make_noise</p1DRel>
+        <p1Syn>haphazardness</p1Syn>
+        <p2Syn>reducing</p2Syn>
+        <p2Syn>reduction</p2Syn>
+        <p1Syn>stochasticity</p1Syn>
+        <p1Syn>randomness</p1Syn>
+        <p1DRel>noise</p1DRel>
+        <p2DRel>weaken</p2DRel>
+        <p2DRel>step_down</p2DRel>
+        <p1DRel>resound</p1DRel>
+        <p1Syn>noise</p1Syn>
+        <p2DRel>de-escalate</p2DRel>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#OLED_Display -->
+
+    <owl:Class rdf:about="&product_ontolology;OLED_Display">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VideoDisplay"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#PC_HDD -->
+
+    <owl:Class rdf:about="&product_ontolology;PC_HDD">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Internal_HDD"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Performance -->
+
+    <owl:Class rdf:about="&product_ontolology;Performance">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Qualitative_Feature"/>
+        <derivationallyRelatedFrom>perform</derivationallyRelatedFrom>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#PhoneBattery -->
+
+    <owl:Class rdf:about="&product_ontolology;PhoneBattery">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Battery"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#PictureQuality -->
+
+    <owl:Class rdf:about="&product_ontolology;PictureQuality">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Display_Quality"/>
+        <synInclude>photo</synInclude>
+        <synInclude>pic</synInclude>
+        <synInclude>icon</synInclude>
+        <synInclude>exposure</synInclude>
+        <synInclude>ikon</synInclude>
+        <synInclude>picture</synInclude>
+        <derivationallyRelatedFrom>iconic</derivationallyRelatedFrom>
+        <synInclude>photograph</synInclude>
+        <synInclude>image</synInclude>
+        <synInclude>painting</synInclude>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Portability -->
+
+    <owl:Class rdf:about="&product_ontolology;Portability">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Qualitative_Feature"/>
+        <derivationallyRelatedFrom>portable</derivationallyRelatedFrom>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#PowerConsumption -->
+
+    <owl:Class rdf:about="&product_ontolology;PowerConsumption">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Qualitative_Feature"/>
+        <p1DRel>herculean</p1DRel>
+        <p2Syn>usance</p2Syn>
+        <p1Syn>electricity</p1Syn>
+        <p1Syn>might</p1Syn>
+        <p2Syn>economic_consumption</p2Syn>
+        <p1Syn>powerfulness</p1Syn>
+        <p2Syn>use</p2Syn>
+        <p2DRel>ingest</p2DRel>
+        <p2DRel>have</p2DRel>
+        <p2DRel>take_in</p2DRel>
+        <p2Syn>consumption</p2Syn>
+        <p1DRel>powerful</p1DRel>
+        <p2DRel>take</p2DRel>
+        <p2DRel>consume</p2DRel>
+        <p2Syn>use_of_goods_and_services</p2Syn>
+        <p1Syn>electrical_energy</p1Syn>
+        <p1Syn>mightiness</p1Syn>
+        <p1Syn>power</p1Syn>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Price -->
+
+    <owl:Class rdf:about="&product_ontolology;Price">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Quantative_Feature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Product -->
+
+    <owl:Class rdf:about="&product_ontolology;Product"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Qualitative_Feature -->
+
+    <owl:Class rdf:about="&product_ontolology;Qualitative_Feature">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Feature"/>
+        <owl:disjointWith rdf:resource="&product_ontolology;Quantative_Feature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#QualityMeasure -->
+
+    <owl:Class rdf:about="&product_ontolology;QualityMeasure"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#QualityOpinion -->
+
+    <owl:Class rdf:about="&product_ontolology;QualityOpinion">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;QualityMeasure"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#QualityScale -->
+
+    <owl:Class rdf:about="&product_ontolology;QualityScale">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;QualityMeasure"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Quantative_Feature -->
+
+    <owl:Class rdf:about="&product_ontolology;Quantative_Feature">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Feature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#RatingValue -->
+
+    <owl:Class rdf:about="&product_ontolology;RatingValue">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;ReviewValue"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#ResponseTime -->
+
+    <owl:Class rdf:about="&product_ontolology;ResponseTime">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;MotionHandling"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Responsiveness -->
+
+    <owl:Class rdf:about="&product_ontolology;Responsiveness">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Qualitative_Feature"/>
+        <derivationallyRelatedFrom>reactive</derivationallyRelatedFrom>
+        <derivationallyRelatedFrom>responsive</derivationallyRelatedFrom>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#ReviewValue -->
+
+    <owl:Class rdf:about="&product_ontolology;ReviewValue"/>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Safety -->
+
+    <owl:Class rdf:about="&product_ontolology;Safety">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VehicleFeatures"/>
+        <derivationallyRelatedFrom>contraceptive</derivationallyRelatedFrom>
+        <synInclude>rubber</synInclude>
+        <synInclude>prophylactic</synInclude>
+        <synInclude>guard</synInclude>
+        <derivationallyRelatedFrom>antifertility</derivationallyRelatedFrom>
+        <synInclude>safe</synInclude>
+        <synInclude>safety_device</synInclude>
+        <synInclude>condom</synInclude>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#SentimentValue -->
+
+    <owl:Class rdf:about="&product_ontolology;SentimentValue">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;ReviewValue"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#SmartTV -->
+
+    <owl:Class rdf:about="&product_ontolology;SmartTV">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Technological_Feature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Sound_Feature -->
+
+    <owl:Class rdf:about="&product_ontolology;Sound_Feature">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Qualitative_Feature"/>
+        <synInclude>sound</synInclude>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Sound_Quality -->
+
+    <owl:Class rdf:about="&product_ontolology;Sound_Quality">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Sound_Feature"/>
+        <synInclude>sound</synInclude>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Speed -->
+
+    <owl:Class rdf:about="&product_ontolology;Speed">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;VehicleFeatures"/>
+        <synInclude>amphetamine</synInclude>
+        <derivationallyRelatedFrom>speedy</derivationallyRelatedFrom>
+        <synInclude>fastness</synInclude>
+        <synInclude>focal_ratio</synInclude>
+        <synInclude>pep_pill</synInclude>
+        <synInclude>upper</synInclude>
+        <derivationallyRelatedFrom>rapid</derivationallyRelatedFrom>
+        <synInclude>f_number</synInclude>
+        <synInclude>swiftness</synInclude>
+        <synInclude>stop_number</synInclude>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#TV -->
+
+    <owl:Class rdf:about="&product_ontolology;TV">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;BrownGoods"/>
+        <rdfs:subClassOf rdf:resource="&product_ontolology;ConsumerElectronicProduct"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&product_ontolology;hasFeature"/>
+                <owl:someValuesFrom rdf:resource="&product_ontolology;Usability_Feature"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&product_ontolology;hasFeature"/>
+                <owl:someValuesFrom rdf:resource="&product_ontolology;Durability"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&product_ontolology;SmartTV"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&product_ontolology;hasFeature"/>
+                        <owl:someValuesFrom rdf:resource="&product_ontolology;3D"/>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&product_ontolology;hasFeature"/>
+                <owl:someValuesFrom rdf:resource="&product_ontolology;Display_Quality"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:complementOf>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&product_ontolology;hasFeature"/>
+                        <owl:someValuesFrom rdf:resource="&product_ontolology;BatteryFeature"/>
+                    </owl:Restriction>
+                </owl:complementOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&product_ontolology;hasFeature"/>
+                <owl:someValuesFrom rdf:resource="&product_ontolology;Sound_Feature"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&product_ontolology;hasFeature"/>
+                <owl:someValuesFrom rdf:resource="&product_ontolology;PowerConsumption"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&product_ontolology;hasComponent"/>
+                <owl:someValuesFrom rdf:resource="&product_ontolology;VideoDisplay"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&product_ontolology;hasFeature"/>
+                <owl:someValuesFrom rdf:resource="&product_ontolology;External_Appearence"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <synInclude>boob tube</synInclude>
+        <synInclude>tv</synInclude>
+        <synInclude>television receiver</synInclude>
+        <synInclude>idiot box</synInclude>
+        <synInclude>television set</synInclude>
+        <synExcludes>receiver,video</synExcludes>
+        <synInclude>tv set</synInclude>
+        <synInclude>goggle box</synInclude>
+        <synInclude>television</synInclude>
+        <synInclude>telly</synInclude>
+    </owl:Class>
+    <owl:Axiom>
+        <isNegative>true</isNegative>
+        <owl:annotatedSource rdf:resource="&product_ontolology;TV"/>
+        <owl:annotatedProperty rdf:resource="&rdfs;subClassOf"/>
+        <owl:annotatedTarget>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&product_ontolology;hasFeature"/>
+                <owl:someValuesFrom rdf:resource="&product_ontolology;PowerConsumption"/>
+            </owl:Restriction>
+        </owl:annotatedTarget>
+    </owl:Axiom>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Technological_Feature -->
+
+    <owl:Class rdf:about="&product_ontolology;Technological_Feature">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Qualitative_Feature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Truck -->
+
+    <owl:Class rdf:about="&product_ontolology;Truck">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Automotive_Vehicle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Usability_Feature -->
+
+    <owl:Class rdf:about="&product_ontolology;Usability_Feature">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Qualitative_Feature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Vehicle -->
+
+    <owl:Class rdf:about="&product_ontolology;Vehicle">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Product"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#VehicleFeatures -->
+
+    <owl:Class rdf:about="&product_ontolology;VehicleFeatures">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Qualitative_Feature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#VideoDisplay -->
+
+    <owl:Class rdf:about="&product_ontolology;VideoDisplay">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;ElectronicComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#VideoQuality -->
+
+    <owl:Class rdf:about="&product_ontolology;VideoQuality">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;Display_Quality"/>
+        <synInclude>video_recording</synInclude>
+        <derivationallyRelatedFrom>televise</derivationallyRelatedFrom>
+        <derivationallyRelatedFrom>telecast</derivationallyRelatedFrom>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#WashingMachine -->
+
+    <owl:Class rdf:about="&product_ontolology;WashingMachine">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;WhiteGoods"/>
+    </owl:Class>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#WhiteGoods -->
+
+    <owl:Class rdf:about="&product_ontolology;WhiteGoods">
+        <rdfs:subClassOf rdf:resource="&product_ontolology;HomeAppliences"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#0Stars -->
+
+    <owl:NamedIndividual rdf:about="&product_ontolology;0Stars">
+        <rdf:type rdf:resource="&product_ontolology;RatingValue"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#1Star -->
+
+    <owl:NamedIndividual rdf:about="&product_ontolology;1Star">
+        <rdf:type rdf:resource="&product_ontolology;RatingValue"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#2Stars -->
+
+    <owl:NamedIndividual rdf:about="&product_ontolology;2Stars">
+        <rdf:type rdf:resource="&product_ontolology;RatingValue"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#3Stars -->
+
+    <owl:NamedIndividual rdf:about="&product_ontolology;3Stars">
+        <rdf:type rdf:resource="&product_ontolology;RatingValue"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#4Stars -->
+
+    <owl:NamedIndividual rdf:about="&product_ontolology;4Stars">
+        <rdf:type rdf:resource="&product_ontolology;RatingValue"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#5Stars -->
+
+    <owl:NamedIndividual rdf:about="&product_ontolology;5Stars">
+        <rdf:type rdf:resource="&product_ontolology;RatingValue"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Aggr_Ft_Contrast_TV_SonyBravia55 -->
+
+    <owl:NamedIndividual rdf:about="&product_ontolology;Aggr_Ft_Contrast_TV_SonyBravia55">
+        <rdf:type rdf:resource="&product_ontolology;Contrast"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Aggr_TV_SonyBravia55 -->
+
+    <owl:NamedIndividual rdf:about="&product_ontolology;Aggr_TV_SonyBravia55">
+        <rdf:type rdf:resource="&product_ontolology;TV"/>
+        <hasFeature rdf:resource="&product_ontolology;Aggr_Ft_Contrast_TV_SonyBravia55"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#SmartHub -->
+
+    <owl:NamedIndividual rdf:about="&product_ontolology;SmartHub">
+        <rdf:type rdf:resource="&product_ontolology;SmartTV"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://cse.mrt.ac.lk/com.sigmacr/ontologies/product_ontolology#Unrated -->
+
+    <owl:NamedIndividual rdf:about="&product_ontolology;Unrated">
+        <rdf:type rdf:resource="&product_ontolology;RatingValue"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&product_ontolology;Battery"/>
+            <rdf:Description rdf:about="&product_ontolology;HardDisk"/>
+            <rdf:Description rdf:about="&product_ontolology;Headset"/>
+            <rdf:Description rdf:about="&product_ontolology;MemoryCard"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&product_ontolology;Feature"/>
+            <rdf:Description rdf:about="&product_ontolology;Product"/>
+            <rdf:Description rdf:about="&product_ontolology;ReviewValue"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&product_ontolology;DigitalCamera"/>
+            <rdf:Description rdf:about="&product_ontolology;ElectronicComponent"/>
+            <rdf:Description rdf:about="&product_ontolology;LapTop"/>
+            <rdf:Description rdf:about="&product_ontolology;MobilePhone"/>
+            <rdf:Description rdf:about="&product_ontolology;TV"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&product_ontolology;Display_Quality"/>
+            <rdf:Description rdf:about="&product_ontolology;External_Appearence"/>
+            <rdf:Description rdf:about="&product_ontolology;Sound_Feature"/>
+            <rdf:Description rdf:about="&product_ontolology;Technological_Feature"/>
+            <rdf:Description rdf:about="&product_ontolology;Usability_Feature"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="comingsoon.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="barchart.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="bootstrap-responsive.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="piechart.css"></h:outputStylesheet>
+
+    <h:outputScript library="js" name="jquery.1.9.1.min.js"></h:outputScript>
+    <h:outputScript library="js" name="highcharts.js"></h:outputScript>
+    <h:outputScript library="js" name="exporting.js"></h:outputScript>
+    <h:outputScript library="js" name="bootstrap-typeahead.js"></h:outputScript>
+    <!--<h:outputScript library="js" name="barchart.js"></h:outputScript>-->
+    <h:outputScript library="js" name="stackbar.js"></h:outputScript>
+    <h:outputScript library="js" name="areachart.js"></h:outputScript>
+
+    <title>Product Summary for #{viewProductBean.productName}</title>
+    <script type="text/javascript">
+        $(function () {
+            $('#container').highcharts(#{viewProductBean.getGraphData()});
+        });
+        var suggsetions = ["Coby LEDTV2326 23-Inch",
+            "LG Electronics 55LN5710",
+            "Samsung UN22F5000 22-Inch",
+            "Samsung UN29F4000 29-Inch",
+            "Samsung UN32EH4003 32-inch",
+            "Samsung UN40EH5300 40-Inch",
+            "Sceptre X408BV-FHD 39-Inch",
+            "Seiki Digital SE32HY10 32-Inch",
+            "VIZIO E221-A1 22-Inch",
+            "VIZIO M321i-A2 32-Inch"
+        ];
+
+        $(document).ready(function () {
+            $(".compareTxt").typeahead({
+                source:suggsetions
+            });
+        });
+    </script>
+</h:head>
+
+<h:body style="background:url(resources/img/pattern.png) repeat center 0 #fff">
+    <div class="wrapperProSum">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1">
+
+                </div>
+                <div class="span11">
+                    <h2 style="color: #f5f5f5;">#{viewProductBean.productName}</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span1">
+
+            </div>
+            <div class="span2">
+
+
+                <img alt="#{viewProductBean.productName}" src="#{viewProductBean.imageURL}"
+                     style="width: 200px; height: 200px; margin-top: 50px; border:#24748c solid; "/>
+
+                <div class="caption">
+                    <p><br/></p>
+
+                    <p>
+                        Compare with
+                        <h:form id="compareForm">
+                            <h:inputText id="compareWith" value="#{compareBean.item2}" styleClass="compareTxt"
+                                         style="margin-top: 10px"></h:inputText>
+                            <h:commandButton action="#{compareBean.compare(viewProductBean.productName)}" value="Go"
+                                             styleClass="btn btn-primary"/>
+                        </h:form>
+                        <!--<input id="" type="text" style="margin-top: 10px"/>-->
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="span6">
+                <div id="container" style="margin-top: 40px; margin-left: 10px; min-width: 310px; height: 300px "></div>
+            </div>
+
+            <div class="span2">
+                <div id="containerstack" style="margin-top: 40px;  height: 370px"></div>
+
+            </div>
+            <div class="span1">
+
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span3"></div>
+            <div class="span6">
+                <div id="containerarea" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            </div>
+            <div class="span2">
+                <div class="row-fluid" style=" height:100px;" ></div>
+                <div class="row-fluid">
+                    <div
+                            class="span6"><img alt="positive" src="resources/img/icon-pos.png"
+                                               style="width: 50px; height: 34px"/></div>
+                    <div class="span6"><h5>25431</h5></div>
+                </div>
+                <div class="row-fluid">
+                    <div
+                            class="span6"><img alt="negative" src="resources/img/icon-neg.png" style="width: 50px
+                                ; height: 34px;"/></div>
+                    <div class="span6"><h5>1234</h5></div>
+                </div>
+                <div class="row-fluid">
+                    <div
+                            class="span6"><img alt="neutral" src="resources/img/icon-neutral.png" style="width:
+                                 50px; height: 34px"/></div>
+                    <div class="span6"><h5>234</h5></div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span6"><img alt="total" src="resources/img/sigma.png" style="width: 50px;
+                         height: 50px"/></div>
+                    <div class="span6"><h5>12899</h5></div>
+                </div>
+                <!--todo fix with divs-->
+                <!--<table style="margin-top: 20px">-->
+                    <!--<tr>-->
+                        <!--<td style="text-align: right"><img src="assets/img/icon-pos.jpg" alt=""-->
+                                                           <!--style="width: 50px; height: 34px"/></td>-->
+                        <!--<td style="text-align: right"><h5>25431</h5></td>-->
+
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td style="text-align: right"><img src="assets/img/icon-neg.jpg" alt=""-->
+                                                           <!--style="width: 50px; height: 34px;"/></td>-->
+                        <!--<td style="text-align: right"><h5>1234</h5></td>-->
+
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td style="text-align: right"><img src="assets/img/icon-neutral.jpg" alt=""-->
+                                                           <!--style="width: 50px; height: 34px"/></td>-->
+                        <!--<td style="text-align: right"><h5>234</h5></td>-->
+
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td style="text-align: right"><img src="assets/img/sigma.png" alt="" style="width: 50px; height:-->
+                         <!--50px"/>-->
+                        <!--</td>-->
+                        <!--<td style="text-align: right"><h5>12899</h5></td>-->
+
+                    <!--</tr>-->
+
+
+                <!--</table>-->
+            </div>
+        </div>
+        <div class="span1"></div>
+
+        <div/>
+    </div>
+
+
+</h:body>
+</html>

@@ -1,0 +1,280 @@
+﻿/**
+// No pronominal coreference is done before these initial phases. We need to identify mentions of products and features before doing pronominal coreference.
+**/
+Phase:	PreProcessing
+Input: Lookup
+Options: control = all
+
+Template: oURI= "http://cse.mrt.ac.lk/sigmacr/ontologies/product_ontolology#${c}"
+Template: ouri=  "http://cse.mrt.ac.lk/sigmacr/ontologies/product_ontolology"
+////////////////////Begin Macro////////////////////////////
+// Makes 3D performance a single feature. Not 3D = 3D feature, performance =Performance feature.
+Macro: FEATURE_QUALITY_FEATURE
+
+(
+ {Mention.class==[oURI c=Performance]}
+)
+
+Macro: FEATURE_QUALITY
+({Token.string==~"(?i)quality|performance"})
+////////////////////END Macro//////////////////////////////
+
+// Fix error with onto root gazetteer.
+Rule: HeuristicLevelFixLong
+(
+ {Lookup.type=="class"}|{Lookup.type=="property"}|{Lookup.type=="instance"}
+):tag
+-->
+:tag{
+		Annotation lookup=tagAnnots.iterator().next();
+        Integer hl=(Integer)lookup.getFeatures().get("heuristic_level");
+		if(hl!=null){		
+        Long hlL=new Long(hl);
+        lookup.getFeatures().put("heuristic_level",hlL);
+		}      		
+}
+
+/**
+**
+**/
+Phase:	LKP0
+Input: Lookup
+Options: control = appelt
+
+//Lookup.heuristic_level==0
+Rule: Lkp0Classes
+(
+ {Lookup.type==class, Lookup.heuristic_level==0, Lookup.propertyURI!~"http"}
+):tag
+-->
+:tag.Mention = {ontology=[ouri], class=:tag.Lookup.URI}
+
+Rule: Lkp0Instances
+(
+ {Lookup.type==instance, Lookup.heuristic_level==0}
+):tag
+-->
+:tag.Mention = {ontology=[ouri], class=:tag.Lookup.classURI, inst=:tag.Lookup.URI}
+
+
+/**
+**
+**/
+Phase: LKP0Clean
+Input: Mention SpaceToken
+Options: control = appelt
+
+/**
+** <Mention>3D</> <Mention>performance</> -->  <Mention>3D Performance</>
+*/
+Rule: UnmentionFeatureQualityFeatures
+
+({Mention.class=="Feature"}{SpaceToken}(FEATURE_QUALITY_FEATURE)):tag -->
+:tag{
+	    Iterator<Annotation> itr=tagAnnots.get("Mention").iterator();
+        Annotation ann1=itr.next();//1st mention
+        Annotation ann2=itr.next();
+        Node start=tagAnnots.firstNode();
+        Node end=tagAnnots.lastNode();
+        FeatureMap features;  //TODO:check if needs clone
+        if(ann1.getStartNode().getOffset()<ann2.getStartNode().getOffset()){    //gate.utils.OffsetComparator can be used also.
+           features= ann1.getFeatures();
+        } else{
+           features= ann2.getFeatures();
+        }     
+
+        inputAS.remove(ann2);
+        inputAS.remove(ann1);
+        outputAS.add(start, end, "Mention", features);
+
+       
+}
+
+// Rule: CleanInsideMention
+
+// ( {Lookup.heuristic_level>0 within Mention}):tag -->
+// :tag{	
+// }
+
+// Rule: SingleOccurences
+// (
+ // {Lookup.type==class}
+// ):tag
+// -->
+// :tag{
+	  // Annotation lookup=tagAnnots.iterator().next();
+        // System.out.println(lookup.getFeatures().get("heuristic_level")) ;
+        // System.out.println(lookup.getFeatures().get("heuristic_level").getClass().getSimpleName());
+        // System.out.println(lookup.getFeatures().get("heuristic_level").equals(0));
+
+// }
+
+Phase: SuspectSetsEngGrammar
+Input: Mention Token VG NounChunk Split
+Options: control = appelt
+
+// it//pronoun , this these// demonstrative pronoun
+Macro: ProductAll  
+({Mention.class==Product}|{Token.category==PRP, Token.root==it} | ({Token.category==DT, Token.root==~"(?i)this|these|that|those"}({Token.category==CD})?))
+
+/**
+// (ProductAll) pattern
+//  Very good Heuristic
+**/
+
+// TV's black level was good.  TV's back level and contrast was good.
+Rule: ProductPossessiveNP
+({Mention.class==Product}):p({Token.category==POS})({!VG,!Split})*:tag --> :tag.FeatureSuspectSet={featureOf=:p.Mention.class, 
+																							pattern="prod-pos", 
+																							majorForm="noun phrase", 
+																							rule="ProductPossessiveNPs"}
+																							
+// It's black level was good.  TV's back level and contrast was good.
+Rule: CorefPossessiveNP																						
+(ProductAll):p({Token.category==~"POS|VBZ" })({!VG,!Split})*:tag --> :tag.FeatureSuspectSet={featureOf=:p.Mention.class, 
+																							pattern="prod-pos", 
+																							majorForm="noun phrase", 
+																							rule="CorefPossessiveNP"}
+
+// TV is very easy to set up and put together.
+// is--> 3rd person singular, to setup --> infinitive
+Rule: _3rdPersonSingularInfinitive
+Priority:300
+(ProductAll){Token.category==VBZ}
+({Token.category==RB})?({Token.category=~"JJ.*"})+
+({Token.category==TO}({Token.category==VB}|{Token.category==NN})({!Split})*):tag
+-->
+:tag.FeatureSuspectSet={ majorForm="Verb Phrase", minorForm="Infinitive", rule="_3rdPersonSingularInfinitive"}
+
+//This TV fits perfectly in the corner
+Rule: _3rdPersonSingularAdverb_ly
+(ProductAll)({Token.category==VBZ, !Token.root==be}
+{Token.category==RB, Token.string=~".*ly"}):tag
+-->
+:tag.FeatureSuspectSet={ majorForm="Verb Phrase", minorForm="adverb-ly", rule="_3rdPersonSingularAdverb_ly"}
+
+//
+Rule: GerundNounMix_Product
+(
+	(
+		(({Token.category==JJ})?{Token.category==NN})[0,2]
+		({Token.category==JJ})?({Token.category==VBG})[0,2]
+		(({Token.category==JJ})?{Token.category==NN})[0,2]
+	)[1,2]
+	{Token.category==CC}
+	({Token.category==JJ})?
+	({Token.category==VBG}|{Token.category==NN})
+):tag {Mention.class==Product}
+-->
+:tag.FeatureSuspectSet= {}
+
+//It has awesome sound and picture , It has awesome sound and picture but the display is bad--> only tags "awesome sound and picture" the other is tagged sperately.
+Rule: hasHavePossessive
+(ProductAll)({VG.tense==SimPre, Token.string=~"ha[sv]"})({NounChunk}):tag --> :tag.FeatureSuspectSet= { majorForm="Noun Phrase", minorForm="", rule="hasHavePossesive"}
+
+
+// it has got awsome sound.
+Rule: PresentPerfect_got  //somewhat informal english
+(ProductAll)({VG.tense==PrePer, VG contains {Token.string==got}})({NounChunk}):tag --> :tag.FeatureSuspectSet= { majorForm="Noun Phrase", minorForm="", rule="PresentPerfect_got"}
+// That one had some LED backlight bleed on the bottom center of it 
+Rule: hadPossessive
+(ProductAll)({VG.tense==SimPas, Token.string==had})({NounChunk}):tag --> :tag.FeatureSuspectSet= { majorForm="Noun Phrase", minorForm="", rule="hadPossesive"}
+
+//The TV is very stylish.It is very nice looking.
+Rule: simPreAdjectiveGerund
+(ProductAll)({VG.tense==SimPre})
+		(
+		  ({Token.category==RB})[0,2]{Token.category==JJ}({Token.category==VBG})?		
+		 ):tag 
+		 --> 
+		:tag.FeatureSuspectSet= { majorForm="AdjectivalPhrase", minorForm="", rule="simPreAdjectiveGerund"}
+
+		
+/**
+//  general patterns
+//  low heuristic
+**/		
+//The picture is very good
+Rule: NounBeAdjective
+Priority: 200
+({NounChunk notContains {Mention.class==Product}} ):tag{Token.root==be}({Token.category==RB})?{Token.category==JJ}
+		--> 
+			:tag.FeatureSuspectSet= { majorForm="NounPhrase", minorForm="", rule="NounBeAdjective"}
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!!!!!!!!!!!!!!!!
+Rule: soundSpecial
+({Token.string=~"sound" }):tag{Token.root==be}({Token.category==RB})?{Token.category==JJ}
+		--> 
+			:tag.FeatureSuspectSet= { majorForm="NounPhrase", minorForm="", rule="sound"}			
+/**
+//specific rules
+**/
+// quality of pics are very good
+Rule: Specific1_of
+((FEATURE_QUALITY){Token.category==IN, Token.string==of}{NounChunk}):tag
+		--> 
+			:tag.FeatureSuspectSet= { majorForm="NounPhrase", minorForm="", rule="Specific1_of"}	
+
+
+			
+			
+	
+			
+			
+Phase: Suspects
+Input: Mention Token VG Split Lookup
+Options: control = appelt
+/**
+/////////////////////////////Using wordnet/////////////////////////////////////////
+**/
+/*
+// performance related from perform. gerund performing
+*/
+Rule: DerivationalyRelatedFrom_Gerund_Product  
+(
+ {Lookup.type==class, Lookup.heuristic_level==0, Lookup.propertyURI==[oURI c="derivationallyRelatedFrom"], 
+  Token.category==VBG}
+):tag({Mention.class==Product, Token.category!=PRP}) //best performing TV. not best performing it.
+-->
+:tag.FeatureSuspect = {ontology=[ouri], class=:tag.Lookup.URI}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//(({Token.category==CC})?({Token.category==JJ})?({Token.category==NN}|{Token.category==VBG})?):f2({Product, Tokent.category!=PRP})
+/////////////////////////////////////////////////////////////////////
+Phase: MarkClasses
+Input: Mention FeatureSuspectSet
+Options: control = appelt
+
+Rule: Features
+({Mention.class==Feature, Mention within FeatureSuspectSet}):tag --> :tag.Feature={class= :tag.Mention.class rule="Direct Mention"}
+
+Rule: Products
+({Mention.class==Product, Mention within FeatureSuspectSet}):tag --> :tag.Product={class= :tag.Mention.class rule="Direct Mention"}
+
+//////////////////////////////////////////////////////////////////
+Phase: MarkSentences
+Input: Sentence Mention
+Options: control = all
+
+Rule: FeatureSentences
+({Sentence contains Feature}):tag --> :tag.FeatureSentence={}
+
+Rule: ProductSentences
+({Sentence contains Product}):tag --> :tag.ProductSentence={}
+
+
+

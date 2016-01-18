@@ -1,0 +1,41 @@
+Phase: reset
+Input: Token
+Options: control = once
+Template: ouri=  "http://cse.mrt.ac.lk/sigmacr/ontologies/product_ontolology"
+Template: p1="http://cse.mrt.ac.lk/sigmacr/ontologies/product_ontolology#p1.*"
+Template: p2="http://cse.mrt.ac.lk/sigmacr/ontologies/product_ontolology#p2.*"
+
+	Macro: P1
+	({Lookup.propertyURI==~"#p1.*"})
+	Macro: P2
+	({Lookup.propertyURI==~"#p2.*"})
+  
+Rule: reset1
+ ({Token valueref {Token.string !=~ "ref"}}) --> {}
+
+
+ 
+Phase: SuspectSetsWNet
+Input: Split Lookup Token
+Options: control = appelt
+
+/**TV (<consumes> a lot of <power>):tag
+**/
+Rule: WNAll
+Priority:400
+(
+({Lookup.propertyURI=~[p2], Lookup valueref{Lookup.URI!~"ref"}} ({!Split})[0,7] {Lookup.propertyURI=~[p1], Lookup valueref{Lookup.URI=="ref"}}) |
+({Lookup.propertyURI=~[p1], Lookup valueref{Lookup.URI!~"ref"}} ({!Split})[0,7] {Lookup.propertyURI=~[p2], Lookup valueref{Lookup.URI=="ref"}})
+):tag 
+	--> :tag.FeatureSection={class= :tag.Lookup.URI  ontology=[ouri]}
+
+
+/**TV (<consumes> <power>):tag a lot
+**/
+Rule: WNALL_WrdsTogether
+Priority:600
+(
+({Lookup.propertyURI=~[p1], Lookup valueref{Lookup.URI!~"ref"}} {Lookup.propertyURI=~[p2], Lookup valueref{Lookup.URI=="ref"}}) |
+({Lookup.propertyURI=~[p2], Lookup valueref{Lookup.URI!~"ref"}} {Lookup.propertyURI=~[p1], Lookup valueref{Lookup.URI=="ref"}})
+)
+:tag --> :tag.Mention={class= :tag.Lookup.URI  ontology=[ouri]}

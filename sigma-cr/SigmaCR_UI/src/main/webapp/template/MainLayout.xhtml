@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+        >
+
+<h:head>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="comingsoon.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="bootstrap-responsive.min.css"></h:outputStylesheet>
+    <h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+</h:head>
+
+<h:body>
+
+    <div id="page">
+
+        <ui:insert name="header">
+            <div class="wrapper">
+
+                <div class="miniSearchbox">
+                    <form action="">
+                        <span class="text"> <input type="text" placeholder="product name"></span>
+                        <span class="subscribe"><button class="btn btn-warning pull-right" type="submit">Search</button></span>
+                    </form>
+                    <br class="clr"/>
+                </div>
+                <p>
+                    <input type="checkbox" id="comparePro"name="compare" value="compare" style="margin-left: 50px"><span style="color: #f5f5f5;">Compare with</span><br>
+                </p>
+            </div>
+        </ui:insert>
+
+
+        <div id="content">
+            <ui:insert name="content">
+            </ui:insert>
+        </div>
+
+        <div id="footer">
+            <ui:insert name="footer">
+                <ui:include src="/template/common/commonFooter.xhtml"/>
+            </ui:insert>
+        </div>
+
+    </div>
+
+</h:body>
+</html>
